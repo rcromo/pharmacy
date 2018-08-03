@@ -1,7 +1,7 @@
 # Table of Contents
 1. [Implementation, Thought Process](README.md#Implementation-Thought-Process)
-2. [Repo Directory Structure Dataset](README.md###Repo-Directory-Structure)
-3. [Tests](README.md##Tests)
+2. [Repo Directory Structure Dataset](README.md#Repo-Directory-Structure)
+3. [Tests](README.md#Tests)
 
 
 # Implementation, Thought Process
@@ -33,7 +33,7 @@ To invalidate this entry, I didn't increment the aggregate or UNIQUE prescriber 
 
 
 
-## Repo Directory Structure:
+# Repo Directory Structure:
 
 
     ├── README.md 
@@ -68,7 +68,7 @@ To invalidate this entry, I didn't increment the aggregate or UNIQUE prescriber 
                  |── output
                      └── top_cost_drug.txt
 
-## Tests 
+# Tests 
 * ***test_1***: Test default functionality; if content is aggregated according to unique prescriber count and aggregate cost per drug.
 
 * ***test_cost_entries***: Test different and invalid entries (0, NaN, Null, None, entries with non-numerical characters.). Tests that order is updated when taking into account invalid cost entries and invalid cost entries reflect a non-update on the prescriber count. Additionally I tested an entry that fits nicely with our second model decision. Say there is only 1 row with a unique drug but that row has an invalid entry for the drug cost. Here it is not possible to replace with mean/mode/medium and to make a prediction you would have to look at similar drugs, which requires knowledge of those drugs. Instead, we completely disregard that entire row. [note: we can possible return that entry with a pre-defined entry to signal that a user is prescribed to that drug but we don't know the cost].
