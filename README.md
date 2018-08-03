@@ -1,5 +1,10 @@
+# Table of Contents
+1. [Implementation, Thought Process](README.md#Implementation,Process)
+2. [Repo Directory Structure Dataset](README.md###Repo_Directory_Structure)
+3. [Tests](README.md##Tests)
 
-### Implementation, Thought Process
+
+# Implementation,Process
 
 Not being able to use Pandas, was definitely of bummer but of course it would all have been too easy.
 
@@ -28,53 +33,58 @@ To invalidate this entry, I didn't increment the aggregate or UNIQUE prescriber 
 
 
 
-##### Repo Directory Structure:
+## Repo_Directory_Structure:
 
-├── README.md 
-├── run.sh
-├── src
-│   └── pharmacy-counting.py
-├── input
-│   └── itcont.txt
-├── output
-|   └── top_cost_drug.txt
-├── insight_testsuite
-    └── run_tests.sh
-    └── tests
-        └── test_1
-        |   ├── input
-        |   │   └── itcont.txt
-        |   |__ output
-        |   │   └── top_cost_drug.txt
-        ├── test_cost_enries
-        |    ├── input
-        |    │   └── itcont.txt
-        |    |── output
-        |    |   └── top_cost_drug.txt
-        ├── test_prescriber_name
-            ├── input
-            │   └── itcont.txt
-            |── output
-                └── top_cost_drug.txt
+
+    ├── README.md 
+    ├── run.sh
+    ├── src
+    │   └── pharmacy-counting.py
+    ├── input
+    │   └── itcont.txt
+    ├── output
+    |   └── top_cost_drug.txt
+    ├── insight_testsuite
+        └── run_tests.sh
+        └── tests
+            └── test_1
+            |   ├── input
+            |   │   └── itcont.txt
+            |   |__ output
+            |   │   └── top_cost_drug.txt
+            ├── your-own-test_1
+            |    ├── input
+            |    │   └── your-own-input-for-itcont.txt
+            |    |── output
+            |        └── top_cost_drug.txt
+            ├── test_cost_enries
+            |    ├── input
+            |    │   └── itcont.txt
+            |    |── output
+            |    |   └── top_cost_drug.txt
+            ├── test_prescriber_name
+                 ├── input
+                 │   └── itcont.txt
+                 |── output
+                     └── top_cost_drug.txt
 
 ## Tests 
-test_1: Test default functionality; if content is aggregated according to unique prescriber count and aggregate cost per drug.
+* test_1: Test default functionality; if content is aggregated according to unique prescriber count and aggregate cost per drug.
 
-test_cost_entries: Test different and invalid entries (0, NaN, Null, None, entries with non-numerical characters.). Tests that order is updated when taking into account invalid cost entries and invalid cost entries reflect a non-update on the prescriber count. Additionally I tested an entry that fits nicely with our second model decision. Say there is only 1 row with a unique drug but that row has an invalid entry for the drug cost. Here it is not possible to replace with mean/mode/medium and to make a prediction you would have to look at similar drugs, which requires knowledge of those drugs. Instead, we completely disregard that entire row. [note: we can possible return that entry with a pre-defined entry to signal that a user is prescribed to that drug but we don't know the cost].
+* test_cost_entries: Test different and invalid entries (0, NaN, Null, None, entries with non-numerical characters.). Tests that order is updated when taking into account invalid cost entries and invalid cost entries reflect a non-update on the prescriber count. Additionally I tested an entry that fits nicely with our second model decision. Say there is only 1 row with a unique drug but that row has an invalid entry for the drug cost. Here it is not possible to replace with mean/mode/medium and to make a prediction you would have to look at similar drugs, which requires knowledge of those drugs. Instead, we completely disregard that entire row. [note: we can possible return that entry with a pre-defined entry to signal that a user is prescribed to that drug but we don't know the cost].
 Test negative and infinity cost entries (both are treated as if cost = 0) 
 
 
-test_prescriber_name: Test that the aggregate prescribers of a drug are unique and despite the value of the first and/or last name entry, they are considered different prescribers ( exception: first and last name are blank or empty space which results in being 1 unique prescriber, we could have discarded the whole role but to keep uniformity in decision model, if the cost entry is valid we assume that at least 1 prescriber is tied to that cost and a result we have a representation for that drug rather than none. Space after or before first name is still the same prescriber (if we were using the id instead of prescriber last and first name to identify prescriber, we would simply check the id)
+* test_prescriber_name: Test that the aggregate prescribers of a drug are unique and despite the value of the first and/or last name entry, they are considered different prescribers ( exception: first and last name are blank or empty space which results in being 1 unique prescriber, we could have discarded the whole role but to keep uniformity in decision model, if the cost entry is valid we assume that at least 1 prescriber is tied to that cost and a result we have a representation for that drug rather than none. Space after or before first name is still the same prescriber (if we were using the id instead of prescriber last and first name to identify prescriber, we would simply check the id)
 
 
 Note: I did not test drug names, rather a drug name is unique according to it's entry, empty or not.
 
 ## Used Libraries
-
-from itertools import groupby
-import csv
-import sys
-import math
+* from itertools import groupby
+* import csv
+* import sys
+* import math
 
 
 
