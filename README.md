@@ -1,7 +1,7 @@
 # Table of Contents
-1. [Implementation, Thought Process](README.md#Implementation-Thought-Process)
-2. [Repo Directory Structure Dataset](README.md#Repo-Directory-Structure)
-3. [Tests](README.md#Tests)
+1. [Implementation, Thought Process](README.md#implementation-thought-process)
+2. [Repo Directory Structure Dataset](README.md#repo-directory-structure)
+3. [Tests](README.md#tests)
 
 
 # Implementation, Thought Process
